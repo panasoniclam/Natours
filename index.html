@@ -24,7 +24,7 @@
         width: 100%;
         /* Make it a tad taller - Could make this 100% as well and set the height in the wrapper */
         height:30px;
-       -webkit-animation: progress 1s ease-out forwards;
+       -webkit-animation: progress .1s ease-out forwards;
 
     }
     /* Attempt to get the appearances to look like the example */
@@ -60,7 +60,11 @@
        
         /*   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; */
     } 
-     
+     .progress-style{
+         background-color: red !important;
+         padding: 15px 50px;
+         width: 100%;
+     }
     
   @keyframes progress {
    from { width: 0%; }
@@ -129,28 +133,22 @@
                             'selectElement'
                         );
                       debugger;
-                        var selected_PB_Value = selected_PB_Element.value;
-                        let currentNode = document.getElementById(selected_PB_Value);
-                        
+                         var selected_PB_Value = selected_PB_Element.value;
+                         var  currentNode = document.getElementById(selected_PB_Value);
                         // Get the next sibling ( the number span)
-                        let nextSibling = currentNode.nextElementSibling;
+                        var  nextSibling = currentNode.nextElementSibling;
                         currentNode.value += responseJsonObj.buttons[b];
-                        
-                        console.log(currentNode.value)
-                        console.log(responseJsonObj.buttons[b])
-                        console.log(currentNode.value);
+                        // console.log(currentNode.value)
+                        // console.log(responseJsonObj.buttons[b])
+                        // console.log(currentNode.value); 
                       if(currentNode.value >= currentNode.max ){
-                         currentNode.setAttribute('style','background-color: red !important');
-                         
-                         
-                         
+                         currentNode.className =  "progress-style";
                         }else{
-                        currentNode.setAttribute('style','background-color:  #b2d7e6  !important');
-                           
-                        }
+                           currentNode.className = "progress-bar";
+                        } 
                         // Also set the text of the number span
                         nextSibling.innerText = currentNode.value + "%";
-                        console.log(nextSibling)
+                        // console.log(nextSibling)
                     });
                     document.body.appendChild(Button);
                 }
