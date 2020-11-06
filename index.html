@@ -1,19 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+ <!DOCTYPE html>
+<html>
 
-        <link rel="stylesheet" href="css/icon-font.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+<head>
+    <title>Test</title>
+</head>
+<style>
+    .wrapper {
+        width: 250px;
+        display: grid;
+        grid-template-columns: 1fr;
+        /* make the text centered vertically and horizontally in the cell */
+        justify-items: center;
+        align-items: center;
+    }
+
+    .wrapper>* {
+        /* All children of the wrapper should share the same grid area! */
+        grid-area: 1 / 1;
+    }
+
+    .progress-bar {
+        /* Make the progress bar expand to fill the whole cell */
+        width: 100%;
+        /* Make it a tad taller - Could make this 100% as well and set the height in the wrapper */
+        height:30px;
+       -webkit-animation: progress 1s ease-out forwards;
+
+    }
+    /* Attempt to get the appearances to look like the example */
+    .progress-bar {
+        /* Reset the default appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 1px solid #cccbcd;
+    }
+    /* These will only work on safari/chromium */
+    
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+        border-radius:2px;
+        /*  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; */
+    }
+    
+    progress[value]::-webkit-progress-value {
+        /*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; */
+           background-color: #b2d7e6;
+            
+    }
+    /* -moz-progress-bar changes the color of the filled part - REALLY inconsistent here */
+
+      progress[value]::-moz-progress-bar {
+        background-color: #b2d7e6;
+        border-radius: 2px; 
+        /*   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; */
+    } 
+    progress[value]::-moz-progress-value {
+        background-color: #b2d7e6;
+       
+        /*   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset; */
+    } 
+     
+    
+  @keyframes progress {
+   from { width: 0%; }
+   to { width: 100%;  }
+    }  
+</style>
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" />
+
+<body>
+ 
+    <script>
         
-        <title>Natours | Exciting tours for adventurous people</title>
-    </head>
-    <body>
-        
-        
-    </body>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //Use parse() method to convert JSON string to JSON object
+                var responseJsonObj = JSON.parse(this.responseText);
+                 console.log(responseJsonObj);
+                for (let p = 0; p < responseJsonObj.bars.length; p++) {
+                    //Create Progress Bars
+                    // Create a wrapper div
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'wrapper';
+                    var Progressbar = document.createElement('PROGRESS');
+                    Progressbar.className = 'progress-bar';
+                    var idTag = 'Progress' + p.toString();
+                    Progressbar.setAttribute('id', idTag);
+                    Progressbar.setAttribute('value', responseJsonObj.bars[p]);
+                    Progressbar.setAttribute('max', responseJsonObj.limit);
+                    // add progress bar to wrapper
+                    wrapper.appendChild(Progressbar);
+                    //Create a span to contain the number
+                    var number = document.createElement('span');
+                    number.innerText = responseJsonObj.bars[p] + "%";
+                    // add number span to wrapper                 
+                    wrapper.appendChild(number);
+                    var br = document.createElement('br');
+                    // add wrapper to document.
+                    document.body.appendChild(wrapper);
+                    document.body.appendChild(br);
+                }
+
+                //Create Drop Down
+                var Select = document.createElement('SELECT');
+                Select.setAttribute('id', 'selectElement');
+                document.body.appendChild(Select);
+                var opt = null;
+                for (o = 0; o < responseJsonObj.bars.length; o++) {
+                    // alert(o);
+                    opt = document.createElement('option');
+                    opt.value = 'Progress' + o;
+                    opt.innerHTML = '#Progress' + o;
+                    Select.appendChild(opt);
+                }
+                for (let b = 0; b < responseJsonObj.buttons.length; b++) {
+                    //Create Buttons
+                    var Button = document.createElement('BUTTON');
+                    Button.innerHTML = responseJsonObj.buttons[b];
+                    Button.addEventListener('click', function(event) {
+                        //Button Event handling
+                        var selected_PB_Element = document.getElementById(
+                            'selectElement'
+                        );
+                      debugger;
+                        var selected_PB_Value = selected_PB_Element.value;
+                        let currentNode = document.getElementById(selected_PB_Value);
+                        
+                        // Get the next sibling ( the number span)
+                        let nextSibling = currentNode.nextElementSibling;
+                        currentNode.value += responseJsonObj.buttons[b];
+                        
+                        console.log(currentNode.value)
+                        console.log(responseJsonObj.buttons[b])
+                        console.log(currentNode.value);
+                      if(currentNode.value >= currentNode.max ){
+                         currentNode.setAttribute('style','background-color: red !important');
+                         
+                         
+                         
+                        }else{
+                        currentNode.setAttribute('style','background-color:  #b2d7e6  !important');
+                           
+                        }
+                        // Also set the text of the number span
+                        nextSibling.innerText = currentNode.value + "%";
+                        console.log(nextSibling)
+                    });
+                    document.body.appendChild(Button);
+                }
+            }
+        };
+       
+        xmlhttp.open('GET', 'http://127.0.0.1:5500/progress.json', true);
+        xmlhttp.send();
+    </script>
+    <p id="demo"></p>
+    <div class="w3-container">
+         
+        <h2>Progress Bars Demo</h2>
+    </div>
+    <br />
+</body>
+
+
 </html>
