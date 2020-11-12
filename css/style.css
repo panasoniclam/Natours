@@ -4,5 +4,152 @@ COLORS:
 Light green: #7ed56f
 Medium green: #55c57a
 Dark green: #28b485
-
 */
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
+
+@keyframes moveToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20rem); }
+  80% {
+    opacity: .8; }
+  100% {
+    opacity: 1;
+    transform: translateX(0.3rem); } }
+
+@keyframes moveToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem); }
+  80% {
+    opacity: .8; }
+  100% {
+    opacity: 1;
+    transform: translateX(0.3rem); } }
+
+@keyframes moveToTop {
+  0% {
+    opacity: 0;
+    transform: translateY(20rem); }
+  80% {
+    opacity: .8; }
+  100% {
+    opacity: 1;
+    transform: translateY(0.3rem); } }
+
+body {
+  font-family: "Lato",sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #fff;
+  margin: 3rem; }
+
+.btn:link, .btn:visited {
+  padding: 2rem 4rem;
+  background: #fff;
+  border-radius: 10rem;
+  color: #777;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  display: inline-block;
+  transition: all .2s;
+  position: relative; }
+
+.btn:hover {
+  transform: translateX(0.3rem);
+  box-shadow: 0 0.5rem 1rem #fff; }
+
+.btn:active {
+  transform: translateX(0.4rem);
+  box-shadow: 0 1rem 2rem #fff; }
+
+.btn-animation {
+  animation: moveToTop .6s ease-out; }
+
+.btn::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: #fff;
+  border-radius: 10rem;
+  transition: all .2s;
+  display: inline-block; }
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0; }
+
+.header {
+  background: linear-gradient(to right bottom, #55c57a, #7ed56f), url("../../img/hero.jpg") no-repeat;
+  height: 95vh;
+  background-position: top;
+  background-size: cover;
+  position: relative; }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo-while {
+    height: 4rem; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; }
+  .header__heading-primary {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 3rem;
+    text-align: center;
+    margin-bottom: 2rem; }
+  .header__heading-primary--main {
+    font-size: 12rem;
+    animation: moveToRight .6s ease-out;
+    display: inline-block;
+    margin-bottom: -8.8rem;
+    padding: 0 0; }
+  .header__heading-primary--sub {
+    font-size: 1.1rem;
+    display: inline-block;
+    animation: moveToLeft .6s ease-out; }
+
+.row {
+  max-width: 114rem;
+  background-color: #eee;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    background-color: orangered;
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% -  6rem)/2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem)/3); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem)/4); }
+  .row .col-1-of-5 {
+    width: calc((100% - 4 * 6rem)/5); }
+  .row .col-2-of-3 {
+    width: calc(2*(100% - 2 * 6rem)/3 + 6rem); }
