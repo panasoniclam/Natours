@@ -1,6 +1,6 @@
 .btn{
     &:link,&:visited{
-        @include btnStyle(2rem,4rem,$color-primary,10rem,$color-primary-dark);
+        @include btnStyle(2rem,4rem,$color-white,10rem,$color-grey-dark);
         @include linkStyle;
         display: inline-block;
         transition: all .2s;
@@ -8,15 +8,14 @@
     }
     &:hover{
         transform: translateX(.3rem);
-        box-shadow: 0 .5rem 1rem $color-primary;
+        box-shadow: 0 .5rem 1rem $color-white;
     }
     &:active{
         transform: translateX(.4rem);
-        box-shadow:  0 1rem 2rem $color-primary;
+        box-shadow:  0 1rem 2rem $color-white;
     }
     &-animation{
         animation: moveToTop .6s ease-out;
-        
     }
     &::after{
         content:"";
@@ -26,7 +25,7 @@
         top: 0;
         right: 0;
         z-index: -1;
-        background: $color-primary;
+        background:$color-white;
         border-radius: 10rem;
         transition: all .2s;
         display: inline-block;
@@ -35,6 +34,25 @@
         transform: scaleX(1.4)  scaleY(1.6);
         opacity: 0;
     }
-
 }
- 
+.btn-text{
+    &:link,
+    &:visited{
+        text-decoration: none;
+        font-size: $default-size;
+        border-bottom: .1rem $color-primary solid;
+        padding: .3rem;
+        color: $color-primary;
+        display: inline-block;
+        transition: all .2s;
+    }
+    &:hover{
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+    }
+    &:active{
+        box-shadow: 0 2rem 4rem rgba($color-black, .15);
+        transform: translateX(.3rem);
+    }
+}
