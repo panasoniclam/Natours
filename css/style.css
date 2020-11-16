@@ -50,7 +50,7 @@ body {
   font-family: "Lato",sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  color: #fff;
+  color: #000;
   margin: 3rem; }
 
 .heading-secondary {
@@ -69,7 +69,7 @@ body {
 
 .heading-tertiary {
   color: #777;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase; }
 
 .paragrap {
@@ -176,6 +176,23 @@ body {
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.15);
   transform: translateX(0.3rem); }
 
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 3px;
+  text-align: center;
+  transition: transform .2s; }
+  .feature-box__icon {
+    font-size: 6rem;
+    color: transparent;
+    margin-bottom: .5rem;
+    -webkit-background-clip: text;
+    display: inline-block;
+    background-image: linear-gradient(to right bottom, #55c57a, #7ed56f); }
+  .feature-box:hover {
+    transform: translateY(-1.5rem) scale(1.03); }
+
 .header {
   background: linear-gradient(to right bottom, rgba(85, 197, 122, 0.2), rgba(126, 213, 111, 0.6)), url("../../img/hero.jpg") no-repeat;
   height: 95vh;
@@ -220,29 +237,38 @@ body {
   .row [class^="col-"] {
     float: left; }
     .row [class^="col-"]:not(:last-child) {
-      margin-right: 2rem; }
+      margin-right: 6rem; }
   .row::after {
     content: "";
     display: table;
     clear: both; }
   .row .col-1-of-2 {
-    width: calc((100% - 2rem)/2); }
+    width: calc((100% - 6rem)/2); }
   .row .col-1-of-3 {
-    width: calc((100% - 2 * 2rem)/3); }
+    width: calc((100% - 2 * 6rem)/3); }
   .row .col-1-of-4 {
-    width: calc((100% - 3 *  2rem)/4); }
+    width: calc((100% - 3 *  6rem)/4); }
   .row .col-2-of-3 {
-    width: calc((100% - 2rem)/2 + 2rem); }
+    width: calc((100% - 6rem)/2 + 6rem); }
   .row .col-2-of-4 {
-    width: calc( (100% - 3 *  2rem)/2); }
+    width: calc( (100% - 3 *  6rem)/2); }
   .row .col-1-of-5 {
-    width: calc((100% - 4 * 2rem)/5); }
+    width: calc((100% - 4 * 6rem)/5); }
   .row .col-3-of-5 {
-    width: calc(3 * ((100% - 4 * 2rem)/5) + (2 * 2rem)); }
+    width: calc(3 * ((100% - 4 * 6rem)/5) + (2 * 6rem)); }
   .row .col-2-of-5 {
-    width: calc( 2 * ((100% - 4 * 2rem)/5) + (1 * 2rem)); }
+    width: calc( 2 * ((100% - 4 * 6rem)/5) + (1 * 6rem)); }
 
 .section-about {
   background-color: #f7f7f7;
   padding: 20rem 0;
   margin-top: -20vh; }
+
+.section-features {
+  padding: 20rem 0;
+  background: linear-gradient(to right bottom, rgba(85, 197, 122, 0.2), rgba(126, 213, 111, 0.6)), url("../../img/nat-4.jpg") no-repeat;
+  background-size: cover;
+  transform: skewY(-7deg);
+  margin-top: -10rem; }
+  .section-features > * {
+    transform: skewY(7deg); }
